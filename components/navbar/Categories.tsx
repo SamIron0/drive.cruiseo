@@ -10,27 +10,12 @@ import { TbCar, TbMovie, TbSchool, TbShoppingCart } from "react-icons/tb"
 
 export const categories = [
   {
-    label: "All",
-    icon: TbCar,
-    description: "View All Available Destinations!"
-  },
-  {
-    label: "Shop",
-    icon: TbShoppingCart,
-    description: "This property is has windmills!"
-  },
-  {
-    label: "Airport",
-    icon: MdFlight,
-    description: "This property is modern!"
-  },
-  {
-    label: "School",
+    label: "Available",
     icon: TbSchool,
     description: "This property is in the countryside!"
   },
   {
-    label: "Cinema",
+    label: "Accepted",
     icon: TbMovie,
     description: "Wanna see a movie?!"
   }
