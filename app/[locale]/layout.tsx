@@ -101,8 +101,8 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers attribute="class" defaultTheme="dark">
           <Toaster richColors position="top-center" duration={3000} />
-          <Navbar />
           <div className="flex h-dvh flex-col items-center overflow-x-auto bg-black text-foreground hide-scrollbar">
+            <Navbar />
             <GlobalState>{children}</GlobalState>
             <Footer />
           </div>
