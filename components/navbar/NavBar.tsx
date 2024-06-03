@@ -20,7 +20,6 @@ export default function Navbar() {
             </div>
           </Container>
         </div>
-        <Categories />
       </div>
     </div>
   );

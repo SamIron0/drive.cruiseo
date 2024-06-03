@@ -9,6 +9,7 @@ import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import { GlobalState } from "@/components/utility/global-state"
 import Footer from "@/components/ui/Footer"
+import Navbar from "@/components/navbar/NavBar"
 
 const inter = Inter({ subsets: ["latin"] })
 const APP_NAME = "Cruiseo"
@@ -100,8 +101,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers attribute="class" defaultTheme="dark">
           <Toaster richColors position="top-center" duration={3000} />
+          <Navbar />
           <div className="flex h-dvh flex-col items-center overflow-x-auto bg-black text-foreground hide-scrollbar">
-            <GlobalState>{children}</GlobalState> 
+            <GlobalState>{children}</GlobalState>
             <Footer />
           </div>
           <Analytics />
