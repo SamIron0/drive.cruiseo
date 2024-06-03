@@ -19,7 +19,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
   const [destinations, setDestinations] = useState<Destination[] | null>([])
   const [searchInput, setSearchInput] = useState<string>("")
-  const [activeCategory, setActiveCategory] = useState<string>("All")
+  const [activeCategory, setActiveCategory] = useState<string>("Available")
   const [trip, setTrip] = useState<Trip | null>(null)
 
   const [selectedTrip, setSelectedTrip] = useState<Tables<"usertrips"> | null>(
