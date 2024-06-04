@@ -34,7 +34,7 @@ function editDistance(a: string, b: string): number {
   return d[m][n]
 }
 interface GridProps {}
-export function Grid() {
+export function Accepted() {
   
   return (<></>)
 }
