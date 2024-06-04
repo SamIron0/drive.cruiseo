@@ -12,7 +12,6 @@ import {
 
     if (req.method === "GET") {
       try {
-        const body = await req.json()
   
         // Extract the id from the request body
         const supabase = createRouteHandlerClient<Database>({ cookies })
