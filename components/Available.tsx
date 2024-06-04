@@ -8,7 +8,6 @@ interface GridProps {}
 export function Available() {
   const { availableTrips, setAvailableTrips } = useContext(CruiseoContext)
   const handleSelectTrip = (trip: any) => {}
-
   return (
     <div>
       {availableTrips ? (
