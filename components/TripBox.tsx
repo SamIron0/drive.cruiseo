@@ -21,7 +21,7 @@ export const TripBox = ({
           }`}
         >
           <div className="mb-3 flex flex-row w-full justify-between">
-            <span className="">{trip.start.date}</span>
+            <span className="">{trip.start?.date}</span>
             <div className="flex flex-row">
               <span className="font-semibold mr-2">2 seats</span>
               <span>${trip.price}</span>
