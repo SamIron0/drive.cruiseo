@@ -8,18 +8,19 @@ import { Button } from "@/components/ui/button"
 import { CruiseoContext } from "@/context/context"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useContext, useEffect } from "react"
 import { supabase } from "@/lib/supabase/browser-client"
 
 export default function Home() {
+  const router = useRouter()
   const { activeCategory } = useContext(CruiseoContext)
 
   useEffect(() => {
     ;(async () => {
       const session = (await supabase.auth.getSession()).data.session
       if (!session) {
-        redirect("/login")
+        router.push("/login")
       }
     })()
   }, [])
