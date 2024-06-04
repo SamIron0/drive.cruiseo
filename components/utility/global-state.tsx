@@ -42,7 +42,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   useEffect(() => {
     ;(async () => {
       const profile = await fetchStartingData()
-      const res = await fetch("/api/getavailabletrips", { method: "GET" })
+      const res = await fetch("/api/availabletrips", { method: "GET" })
       const data = await res.json()
       console.log(data)
       setAvailableTrips(data)

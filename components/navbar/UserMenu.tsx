@@ -39,24 +39,7 @@ export default function UserMenu() {
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div
-          onClick={() => ({})}
-          className="
-            hidden
-            md:block
-            text-sm 
-            font-medium
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-[#232325]
-
-            transition 
-            cursor-pointer
-          "
-        >
-          How it works
-        </div>
+        
         <div
           onClick={toggleOpen}
           className="
