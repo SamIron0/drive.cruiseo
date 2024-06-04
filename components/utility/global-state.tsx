@@ -5,6 +5,7 @@ import { CruiseoContext } from "@/context/context"
 import { getProfileByUserId } from "@/db/profile"
 import { supabase } from "@/lib/supabase/browser-client"
 import { Tables } from "@/supabase/types"
+import { redirect } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 
 interface GlobalStateProps {
@@ -45,7 +46,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const res = await fetch("/api/availabletrips", { method: "GET" })
       const data = await res.json()
       console.log(data)
-      setAvailableTrips(data)
+
+      !data.error ? setAvailableTrips(data) : redirect("/login")
     })()
   }, [])
 
