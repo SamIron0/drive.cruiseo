@@ -1,14 +1,11 @@
 "use client"
-import Container from "./Container"
-import ClientOnly from "./ClientOnly"
-import { useContext, useEffect } from "react"
-import { CruiseoContext } from "@/context/context"
-import { getProfileByUserId } from "@/db/profile"
-import { supabase } from "@/lib/supabase/browser-client"
 
+import { TripBox } from "./TripBox"
 
 interface GridProps {}
 export function Accepted() {
-  
-  return (<></>)
+  const handleSelectTrip = (trip: any) => {}
+  return (
+    <TripBox onSelectTrip={handleSelectTrip} trips={[]} selectedTrip={null} />
+  )
 }

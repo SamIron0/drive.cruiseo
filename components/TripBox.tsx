@@ -1,11 +1,11 @@
 import { Tables } from "@/supabase/types"
 
-interface TripsProps {
+interface TripBoxProps {
   trips: Tables<"usertrips">[]
   onSelectTrip: (trip: Tables<"usertrips">) => void
   selectedTrip: Tables<"usertrips"> | null
 }
-export const Trips = ({ trips, selectedTrip ,onSelectTrip}: TripsProps) => {
+export const TripBox = ({ trips, selectedTrip ,onSelectTrip}: TripBoxProps) => {
   return (
     <div className="p-4 overflow-y-auto">
       {trips.map(trip => (
