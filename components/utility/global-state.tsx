@@ -47,7 +47,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const data = await res.json()
       console.log(data)
 
-      !data.error ? setAvailableTrips(data) : redirect("/login")
+      !data.error ? setAvailableTrips(data) : null
     })()
   }, [])
 

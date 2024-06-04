@@ -9,10 +9,13 @@ import { CruiseoContext } from "@/context/context"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
+import { supabase } from "@/lib/supabase/browser-client"
 
 export default function Home() {
   const { activeCategory } = useContext(CruiseoContext)
+
+
   return (
     <div className="flex flex-col w-full items-center ">
       <Navbar />
