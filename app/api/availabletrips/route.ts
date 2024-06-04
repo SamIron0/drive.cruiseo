@@ -7,8 +7,10 @@ import {
   import { cookies } from "next/headers"
   import { Database, TablesInsert } from "@/supabase/types"
   
-  export async function POST(req: Request) {
-    if (req.method === "POST") {
+  export async function GET(req: Request) {
+    
+
+    if (req.method === "GET") {
       try {
         const body = await req.json()
   
