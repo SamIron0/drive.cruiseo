@@ -73,9 +73,6 @@ export default async function RootLayout({
   )
   const session = (await supabase.auth.getSession()).data.session
 
-  if (!session) {
-    redirect("/login")
-  }
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

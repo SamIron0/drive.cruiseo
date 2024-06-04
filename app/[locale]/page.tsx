@@ -15,6 +15,14 @@ import { supabase } from "@/lib/supabase/browser-client"
 export default function Home() {
   const { activeCategory } = useContext(CruiseoContext)
 
+  useEffect(() => {
+    ;(async () => {
+      const session = (await supabase.auth.getSession()).data.session
+      if (!session) {
+        redirect("/login")
+      }
+    })()
+  }, [])
 
   return (
     <div className="flex flex-col w-full items-center ">
