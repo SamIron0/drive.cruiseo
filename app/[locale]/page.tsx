@@ -11,7 +11,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { useContext } from "react"
 
-export default async function Home() {
+export default function Home() {
   const { activeCategory } = useContext(CruiseoContext)
   return (
     <div className="flex flex-col w-full items-center ">
