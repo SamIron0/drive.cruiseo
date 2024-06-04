@@ -1,5 +1,4 @@
 import { supabase } from "@/lib/supabase/browser-client"
-import { Destination, Trip } from "@/types"
 
 export const deleteTrip = async (tripId: string, userId: string) => {
   // delete from trips array
