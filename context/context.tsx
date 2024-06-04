@@ -3,10 +3,8 @@ import { Dispatch, SetStateAction, createContext } from "react"
 interface CruiseoContext {
   availableTrips: Tables<"trips">[]
   setAvailableTrips: Dispatch<SetStateAction<Tables<"trips">[]>>
-  selectedTrip: Tables<"usertrips"> | null
-  setSelectedTrip: Dispatch<SetStateAction<Tables<"usertrips"> | null>>
-  destinations: Tables<"destinations">[] | null
-  setDestinations: Dispatch<SetStateAction<Tables<"destinations">[] | null>>
+  selectedTrip: Tables<"drivertrips"> | null
+  setSelectedTrip: Dispatch<SetStateAction<Tables<"drivertrips"> | null>>
   searchInput: string
   setSearchInput: Dispatch<SetStateAction<string>>
   activeCategory: string
@@ -20,8 +18,6 @@ export const CruiseoContext = createContext<CruiseoContext>({
   setSelectedTrip: () => {},
   availableTrips: [],
   setAvailableTrips: () => {},
-  destinations: [],
-  setDestinations: () => {},
   searchInput: "",
   setSearchInput: () => {},
   activeCategory: "",

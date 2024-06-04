@@ -76,7 +76,7 @@ export type Database = {
           }
         ]
       }
-      usertrips: {
+    drivertrips: {
         Row: {
           id: string // bigint
           uid: string
