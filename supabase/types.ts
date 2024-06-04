@@ -76,39 +76,55 @@ export type Database = {
           }
         ]
       }
-    drivertrips: {
+      drivers: {
         Row: {
-          id: string // bigint
-          uid: string
-          tripid: string
-          origin: string
-          destination: string
-          price: number
-          pickup?: Date | null // jsonb
-          dropoff?: Date | null // jsonb
-          created_at?: string | null // timestamp with time zone
+          id: string
+          user_id: string
+          license_number: string
+          vehicle_details: string
+          rating: number
         }
         Insert: {
-          id: string | null // bigint, nullable for insert as it's auto-generated
-          uid: string
-          tripid: string
-          origin: string
-          destination: string
-          price: number
-          pickup?: Date | null // jsonb, nullable
-          dropoff?: Date | null // jsonb, nullable
-          created_at?: string | null // timestamp with time zone, nullable
+          id?: string
+          user_id?: string
+          license_number?: string
+          vehicle_details?: string
+          rating?: number
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          license_number?: string
+          vehicle_details?: string
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drivers_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      drivertrips: {
+        Row: {
+          id: string // bigint
+          trip_id: string
+          driver_id: string
+          claimed_at?: Date | null // timestamp with time zone
+        }
+        Insert: {
+          id?: string | null // bigint, nullable for insert as it's auto-generated
+          trip_id?: string
+          driver_id?: string
+          claimed_at?: Date | null // timestamp with time zone
         }
         Update: {
           id?: string | null // bigint, nullable for update
-          uid: string | null // uuid, nullable
-          tripid: string
-          origin?: string | null // uuid, nullable
-          destination?: string | null // uuid, nullable
-          price?: number | null // numeric, nullable
-          pickup?: Date | null // jsonb, nullable
-          dropoff?: Date | null // jsonb, nullable
-          created_at?: string | null // timestamp with time zone, nullable
+          trip_id?: string
+          driver_id?: string
+          claimed_at?: Date | null // timestamp with time zone
         }
         Relationships: [
           {
