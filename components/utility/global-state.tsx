@@ -18,7 +18,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("Available")
-
+  const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
   const [selectedTrip, setSelectedTrip] = useState<Tables<"usertrips"> | null>(
     null
   )
@@ -42,6 +42,10 @@ export const GlobalState: FC<GlobalStateProps> = ({
   useEffect(() => {
     ;(async () => {
       const profile = await fetchStartingData()
+      const res = await fetch("/api/getavailabletrips", { method: "GET" })
+      const data = await res.json()
+      console.log(data)
+      setAvailableTrips(data)
     })()
   }, [])
 
@@ -61,12 +65,14 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
+        availableTrips,
+        setAvailableTrips,
         profile,
         setProfile,
         selectedTrip,
         setSelectedTrip,
-        destinations : [],
-        setDestinations : () => {},
+        destinations: [],
+        setDestinations: () => {},
         searchInput,
         setSearchInput,
         activeCategory,

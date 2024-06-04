@@ -1,11 +1,15 @@
 "use client"
 
+import { useContext, useEffect } from "react"
 import { TripBox } from "./TripBox"
+import { CruiseoContext } from "@/context/context"
 
 interface GridProps {}
 export function Accepted() {
-  const handleSelectTrip = (trip: any) => {}
+  const { availableTrips, setAvailableTrips } = useContext(CruiseoContext)
   return (
-    <TripBox onSelectTrip={handleSelectTrip} trips={[]} selectedTrip={null} />
+    <div>
+      
+    </div>
   )
 }
