@@ -17,7 +17,7 @@ export default async function Home() {
     <div className="flex flex-col w-full items-center ">
       <Navbar />
 
-      <div className="mt-12 flex flex-col w-full p-4 items-center max-w-3xl">
+      <div className="mt-24 flex flex-col w-full p-4 items-center max-w-3xl">
         <p className="flex text-3xl w-full"> Welcome back, Samuel 👋</p>
         <span className="flex text-xl w-full justify-end">Pending: 0</span>
         <span className="text-xl flex mb-6 w-full justify-end">Payout: 0</span>
