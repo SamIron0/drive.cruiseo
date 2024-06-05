@@ -32,7 +32,7 @@ export const TripBox = ({
   onSelectTrip
 }: TripBoxProps) => {
   return (
-    <div className="p-4 overflow-y-auto">
+    <div className="p-4 flex flex-col overflow-y-auto">
       {trips?.map(trip => (
         <Drawer>
           <DrawerTrigger>
@@ -92,7 +92,7 @@ export const TripBox = ({
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <Button onClick={() => onSelectTrip(trip)}>
+                  <Button className="w-full" onClick={() => onSelectTrip(trip)}>
                     Accept Trip
                   </Button>
                 </AlertDialogTrigger>

@@ -25,7 +25,7 @@ export function Available() {
     toast.success("Trip Accepted")
   }
   return (
-    <div>
+    <div className="w-full">
       {availableTrips ? (
         <TripBox onSelectTrip={handleSelectTrip} trips={availableTrips} />
       ) : (
