@@ -21,9 +21,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("Available")
   const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
-  const [selectedTrip, setSelectedTrip] = useState<Tables<"drivertrips"> | null>(
-    null
-  )
+  const [selectedTrip, setSelectedTrip] =
+    useState<Tables<"drivertrips"> | null>(null)
 
   useEffect(() => {
     // Update localStorage when selectedTrip changes
@@ -63,7 +62,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
       if (!profile.has_onboarded) {
         return router.push("/setup")
       }
-            setProfile(profile)
+      setProfile(profile)
 
       return profile
     }
