@@ -25,8 +25,9 @@ export function Available() {
     toast.success("Trip Accepted")
   }
   return (
-    <div>
+    <div>x
       {availableTrips ? (
+        
         <TripBox
           onSelectTrip={handleSelectTrip}
           trips={availableTrips}
