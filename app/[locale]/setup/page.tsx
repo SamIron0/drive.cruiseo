@@ -1,7 +1,11 @@
 "use client"
 
 import { CruiseoContext } from "@/context/context"
-import { getProfileByUserId, updateProfile } from "@/db/profile"
+import {
+  createDriverProfile,
+  getProfileByUserId,
+  updateProfile
+} from "@/db/profile"
 
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesUpdate } from "@/supabase/types"
@@ -13,6 +17,7 @@ import {
   SETUP_STEP_COUNT,
   StepContainer
 } from "../../../components/setup/step-container"
+import { v4 as uuid } from "uuid"
 export default function SetupPage() {
   const { profile, setProfile } = useContext(CruiseoContext)
 
@@ -77,6 +82,12 @@ export default function SetupPage() {
       phone
     }
     const updatedProfile = await updateProfile(profile.id, updateProfilePayload)
+    //create new driver profile
+    const driverProfile = await createDriverProfile({
+      id: uuid(),
+      user_id: user.id,
+      rating: 5,
+    })
 
     // updaate local and db settings
     setProfile(updatedProfile)

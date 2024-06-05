@@ -85,14 +85,14 @@ export type Database = {
           rating: number
         }
         Insert: {
-          id?: string
+          id: string
           user_id?: string
           license_number?: string
           vehicle_details?: string
           rating?: number
         }
         Update: {
-          id?: string
+          id: string
           user_id?: string
           license_number?: string
           vehicle_details?: string
