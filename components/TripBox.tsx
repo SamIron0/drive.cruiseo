@@ -39,7 +39,6 @@ export const TripBox = ({
             {" "}
             <div
               key={trip.id}
-              onClick={() => onSelectTrip(trip)}
               className={`flex text-sm flex-col items-center border mb-2 p-4 rounded-lg ${
                 selectedTrip?.id === trip.id
                   ? "border-zinc-500"
@@ -92,7 +91,7 @@ export const TripBox = ({
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <Button className="w-full" onClick={() => onSelectTrip(trip)}>
+                  <Button className="px-8" onClick={() => onSelectTrip(trip)}>
                     Accept Trip
                   </Button>
                 </AlertDialogTrigger>
