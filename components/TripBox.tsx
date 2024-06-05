@@ -78,7 +78,7 @@ export const TripBox = ({
             <DrawerHeader>
               <DrawerTitle>Trip Details</DrawerTitle>
             </DrawerHeader>
-            <Button>Accept Trip</Button>
+            <Button onClick={() => onSelectTrip(trip)}>Accept Trip</Button>
 
             <DrawerFooter>
               <DrawerClose>Cancel</DrawerClose>

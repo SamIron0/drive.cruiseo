@@ -37,3 +37,6 @@ export const getAcceptedTrips = async (driverId: string) => {
 
   return trips
 }
+export const acceptTrip = async (tripId: string, driverId: string) => {
+  return
+}

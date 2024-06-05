@@ -7,7 +7,15 @@ import { CruiseoContext } from "@/context/context"
 interface GridProps {}
 export function Available() {
   const { availableTrips, setAvailableTrips } = useContext(CruiseoContext)
-  const handleSelectTrip = (trip: any) => {}
+  const handleSelectTrip = async (trip: any) => {
+    const res = await fetch("api/acceptTrip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ trip })
+    })
+  }
   return (
     <div>
       {availableTrips ? (
