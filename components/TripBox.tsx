@@ -85,15 +85,13 @@ export const TripBox = ({
             </div>
           </DrawerTrigger>
           <DrawerContent>
-            <div className="w-full max-w-3xl flex flex-col items-center">
+            <div className="w-full max-w-3xl flex flex-col mx-auto items-center">
               <DrawerHeader>
                 <DrawerTitle>Trip Details</DrawerTitle>
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <Button className="px-8" onClick={() => onSelectTrip(trip)}>
-                    Accept Trip
-                  </Button>
+                  <Button className="px-20">Accept Trip</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -105,7 +103,9 @@ export const TripBox = ({
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Continue</AlertDialogAction>
+                    <AlertDialogAction onClick={() => onSelectTrip(trip)}>
+                      Continue
+                    </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
