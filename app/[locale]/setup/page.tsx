@@ -92,7 +92,7 @@ export default function SetupPage() {
       case 1:
         return (
           <StepContainer
-            stepDescription="Let's create your profile."
+            stepDescription="Let's create your driver profile."
             stepNum={currentStep}
             stepTitle="Welcome to Cruiseo"
             onShouldProceed={handleShouldProceed}

@@ -15,6 +15,12 @@ export function Available() {
       },
       body: JSON.stringify({ trip })
     })
+
+    //after acceptting trip, rettrieve available trips
+    const result = await fetch("/api/availabletrips", { method: "GET" })
+    const data = await result.json()
+    setAvailableTrips(data)
+    
   }
   return (
     <div>

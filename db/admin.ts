@@ -15,7 +15,7 @@ export const getAvailableTrips = async () => {
   const { data: trips, error } = await supabaseAdmin
     .from("trips")
     .select("*")
-    .eq("status", "available")
+    .eq("status", "pending")
 
   if (error) {
     console.error("Error retrieving trips:", error)
@@ -59,4 +59,18 @@ export const acceptTrip = async (tripId: string, driverId: string) => {
   }
 
   return driverTrip
+}
+
+export const completeTrip = async (tripId: string) => {
+  const { data: trip, error } = await supabaseAdmin
+    .from("trips")
+    .update({ id: tripId, status: "completed" })
+    .eq("id", tripId)
+
+  if (error) {
+    console.error("Error completing trips:", error)
+    return null
+  }
+
+  return trip
 }
