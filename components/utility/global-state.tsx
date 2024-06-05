@@ -34,7 +34,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const available_data = await available_res.json()
       const accepted_data = await accepted_res.json()
  
-        console.log('new data',available_data)
+        console.log('new data',available_res)
       
       !available_data.error ? setAvailableTrips(available_data) : null
       !accepted_data.error ? setAcceptedTrips(accepted_data) : null
