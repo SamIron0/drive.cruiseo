@@ -30,9 +30,9 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const available_res = await fetch("/api/availabletrips", {
         method: "GET"
       })
-      //const accepted_res = await fetch("/api/acceptedtrips", { method: "GET" })
+      const accepted_res = await fetch("/api/getAcceptedTrips", { method: "GET" })
       const available_data = await available_res.json()
-      //const accepted_data = await accepted_res.json()
+      const accepted_data = await accepted_res.json()
 
       console.log("new data", available_res)
 
