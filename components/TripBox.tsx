@@ -22,9 +22,9 @@ import {
 } from "./ui/alert-dialog"
 
 interface TripBoxProps {
-  trips: Tables<"trips">[]
+  trips: Tables<"trips">[] | null
   onSelectTrip: (trip: Tables<"trips">) => void
-  selectedTrip: Tables<"trips"> | null
+  selectedTrip?: Tables<"trips"> | null
 }
 export const TripBox = ({
   trips,
@@ -33,7 +33,7 @@ export const TripBox = ({
 }: TripBoxProps) => {
   return (
     <div className="p-4 overflow-y-auto">
-      {trips.map(trip => (
+      {trips?.map(trip => (
         <Drawer>
           <DrawerTrigger>
             {" "}

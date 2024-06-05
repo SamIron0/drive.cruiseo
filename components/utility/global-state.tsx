@@ -21,24 +21,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("Available")
   const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
-  const [selectedTrip, setSelectedTrip] =
-    useState<Tables<"drivertrips"> | null>(null)
-
-  useEffect(() => {
-    // Update localStorage when selectedTrip changes
-    if (typeof window !== "undefined") {
-      if (selectedTrip) {
-        window.localStorage.setItem(
-          "selectedTrip",
-          JSON.stringify(selectedTrip)
-        )
-      }
-
-      if (!selectedTrip) {
-        window.localStorage.removeItem("selectedTrip")
-      }
-    }
-  }, [selectedTrip])
+  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"drivertrips">[]>([])
+  useState<Tables<"drivertrips"> | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -71,12 +55,12 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
+        acceptedTrips,
+        setAcceptedTrips,
         availableTrips,
         setAvailableTrips,
         profile,
         setProfile,
-        selectedTrip,
-        setSelectedTrip,
         searchInput,
         setSearchInput,
         activeCategory,

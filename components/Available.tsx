@@ -30,7 +30,6 @@ export function Available() {
         <TripBox
           onSelectTrip={handleSelectTrip}
           trips={availableTrips}
-          selectedTrip={null}
         />
       ) : (
         <p>No trips available</p>
