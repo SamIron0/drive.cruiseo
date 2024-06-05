@@ -38,5 +38,25 @@ export const getAcceptedTrips = async (driverId: string) => {
   return trips
 }
 export const acceptTrip = async (tripId: string, driverId: string) => {
-  return
+  const { data: trip, error } = await supabaseAdmin
+    .from("trips")
+    .update({ id: tripId, status: "accepted" })
+    .eq("id", tripId)
+
+  if (error) {
+    console.error("Error retrieving trips:", error)
+    return null
+  }
+
+  const { data: driverTrip, error: driverTripError } = await supabaseAdmin
+    .from("drivertrips")
+    .insert({ id: uuid(), driver_id: driverId, trip_id: tripId })
+    .select("*")
+
+  if (driverTripError) {
+    console.error("Error retrieving trips:", driverTripError)
+    return null
+  }
+
+  return driverTrip
 }
