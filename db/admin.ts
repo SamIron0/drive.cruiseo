@@ -78,7 +78,7 @@ export const completeTrip = async (tripId: string) => {
 export const cancelTrip = async (tripId: string) => {
   const { data: trip, error } = await supabaseAdmin
     .from("trips")
-    .update({ id: tripId, status: "cancelled" })
+    .update({ id: tripId, status: "pending" })
     .eq("id", tripId)
 
   if (error) {
