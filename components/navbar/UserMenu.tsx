@@ -39,7 +39,6 @@ export default function UserMenu() {
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        
         <div
           onClick={toggleOpen}
           className="
@@ -84,11 +83,6 @@ export default function UserMenu() {
           <div className="flex flex-col cursor-pointer">
             {profile ? (
               <>
-                <MenuItem
-                  label="My Account"
-                  onClick={() => router.push("/dashboard")}
-                />
-
                 <MenuItem
                   label="Logout"
                   onClick={() => {
