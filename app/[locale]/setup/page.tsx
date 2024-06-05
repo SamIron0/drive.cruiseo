@@ -23,7 +23,6 @@ export default function SetupPage() {
   const [currentStep, setCurrentStep] = useState(1)
 
   // Profile Step
-  const [displayName, setDisplayName] = useState("")
   const [username, setUsername] = useState(profile?.username || "")
   const [usernameAvailable, setUsernameAvailable] = useState(true)
   const [phone, setPhone] = useState("")
@@ -74,7 +73,6 @@ export default function SetupPage() {
       ...profile,
 
       has_onboarded: true,
-      display_name: displayName,
       username,
       phone
     }
@@ -96,7 +94,7 @@ export default function SetupPage() {
             stepNum={currentStep}
             stepTitle="Welcome to Cruiseo"
             onShouldProceed={handleShouldProceed}
-            showNextButton={!!(username && usernameAvailable)}
+            showNextButton={!!(username && phone.length == 10)}
             showBackButton={false}
           >
             <ProfileStep
