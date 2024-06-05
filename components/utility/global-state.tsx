@@ -5,7 +5,7 @@ import { CruiseoContext } from "@/context/context"
 import { getProfileByUserId } from "@/db/profile"
 import { supabase } from "@/lib/supabase/browser-client"
 import { Tables } from "@/supabase/types"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 
 interface GlobalStateProps {
@@ -15,6 +15,7 @@ interface GlobalStateProps {
 export const GlobalState: FC<GlobalStateProps> = ({
   children
 }: GlobalStateProps) => {
+  const router = useRouter()
   // PROFILE STORE
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
   const [searchInput, setSearchInput] = useState<string>("")
@@ -58,7 +59,11 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const user = session.user
 
       const profile = await getProfileByUserId(user.id)
-      setProfile(profile)
+
+      if (!profile.has_onboarded) {
+        return router.push("/setup")
+      }
+            setProfile(profile)
 
       return profile
     }
