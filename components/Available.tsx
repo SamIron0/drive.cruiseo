@@ -3,6 +3,7 @@
 import { useContext } from "react"
 import { TripBox } from "./TripBox"
 import { CruiseoContext } from "@/context/context"
+import { toast } from "sonner"
 
 interface GridProps {}
 export function Available() {
@@ -20,7 +21,8 @@ export function Available() {
     const result = await fetch("/api/availabletrips", { method: "GET" })
     const data = await result.json()
     setAvailableTrips(data)
-    
+
+    toast.success("Trip Accepted")
   }
   return (
     <div>

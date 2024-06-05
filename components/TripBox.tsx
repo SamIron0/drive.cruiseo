@@ -9,6 +9,17 @@ import {
   DrawerTrigger
 } from "./ui/drawer"
 import { Button } from "./ui/button"
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction
+} from "./ui/alert-dialog"
 
 interface TripBoxProps {
   trips: Tables<"trips">[]
@@ -75,14 +86,37 @@ export const TripBox = ({
             </div>
           </DrawerTrigger>
           <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Trip Details</DrawerTitle>
-            </DrawerHeader>
-            <Button onClick={() => onSelectTrip(trip)}>Accept Trip</Button>
+            <div className="w-full max-w-3xl flex flex-col items-center">
+              <DrawerHeader>
+                <DrawerTitle>Trip Details</DrawerTitle>
+              </DrawerHeader>
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <Button>Accept Trip</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action alerts the user that the trip has been
+                      accepted.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction>
+                      <Button onClick={() => onSelectTrip(trip)}>
+                        Continue
+                      </Button>
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
 
-            <DrawerFooter>
-              <DrawerClose>Cancel</DrawerClose>
-            </DrawerFooter>
+              <DrawerFooter>
+                <DrawerClose>Cancel</DrawerClose>
+              </DrawerFooter>
+            </div>
           </DrawerContent>
         </Drawer>
       ))}
