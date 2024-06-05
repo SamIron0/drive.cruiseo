@@ -40,46 +40,6 @@ export const ProfileStep: FC<ProfileStepProps> = ({
     }
   }
 
-  const checkUsernameAvailability = useCallback(
-    debounce(async (username: string) => {
-      if (!username) return
-
-      if (username.length < PROFILE_USERNAME_MIN) {
-        onUsernameAvailableChange(false)
-        return
-      }
-
-      if (username.length > PROFILE_USERNAME_MAX) {
-        onUsernameAvailableChange(false)
-        return
-      }
-
-      const usernameRegex = /^[a-zA-Z0-9_]+$/
-      if (!usernameRegex.test(username)) {
-        onUsernameAvailableChange(false)
-        alert(
-          "Username must be letters, numbers, or underscores only - no other characters or spacing allowed."
-        )
-        return
-      }
-
-      setLoading(true)
-
-      const response = await fetch(`/api/username/available`, {
-        method: "POST",
-        body: JSON.stringify({ username })
-      })
-
-      const data = await response.json()
-      const isAvailable = data.isAvailable
-
-      onUsernameAvailableChange(isAvailable)
-
-      setLoading(false)
-    }, 500),
-    []
-  )
-
   return (
     <>
       <div className="space-y-1">
@@ -102,10 +62,7 @@ export const ProfileStep: FC<ProfileStepProps> = ({
             value={username}
             onChange={e => {
               onUsernameChange(e.target.value)
-              checkUsernameAvailability(e.target.value)
             }}
-            minLength={PROFILE_USERNAME_MIN}
-            maxLength={PROFILE_USERNAME_MAX}
           />
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -118,7 +75,6 @@ export const ProfileStep: FC<ProfileStepProps> = ({
             )}
           </div>
         </div>
-
       </div>
     </>
   )
