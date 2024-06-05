@@ -21,17 +21,21 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("Available")
   const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
-  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"drivertrips">[]>([])
+  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips">[]>([])
   useState<Tables<"drivertrips"> | null>(null)
 
   useEffect(() => {
     ;(async () => {
       const profile = await fetchStartingData()
-      const res = await fetch("/api/availabletrips", { method: "GET" })
-      const data = await res.json()
-      console.log(data)
+      const available_res = await fetch("/api/availabletrips", {
+        method: "GET"
+      })
+      const accepted_res = await fetch("/api/acceptedtrips", { method: "GET" })
+      const available_data = await available_res.json()
+      const accepted_data = await accepted_res.json()
 
-      !data.error ? setAvailableTrips(data) : null
+      !available_data.error ? setAvailableTrips(available_data) : null
+      !accepted_data.error ? setAcceptedTrips(accepted_data) : null
     })()
   }, [])
 
