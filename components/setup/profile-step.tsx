@@ -44,7 +44,7 @@ export const ProfileStep: FC<ProfileStepProps> = ({
     <>
       <div className="space-y-1">
         <div className="flex items-center space-x-2">
-          <Label>Username</Label>
+          <Label>Full name</Label>
 
           <div className="text-xs">
             {usernameAvailable ? (

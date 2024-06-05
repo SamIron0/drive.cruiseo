@@ -26,18 +26,8 @@ export default function SetupPage() {
   const [displayName, setDisplayName] = useState("")
   const [username, setUsername] = useState(profile?.username || "")
   const [usernameAvailable, setUsernameAvailable] = useState(true)
-  const [protein, setProtein] = useState(25)
-  const [carbs, setCarbs] = useState(50)
-  const [fat, setFat] = useState(25)
-  const [calories, setCalories] = useState(2505)
-  const [height, setHeight] = useState(0)
-  const [weight, setWeight] = useState(0)
-  const [age, setAge] = useState(0)
-  const [gender, setGender] = useState("")
-  const [activityLevel, setActivityLevel] = useState(0)
-  const [workouts, setWorkouts] = useState(0)
-  const [allergies, setAllergies] = useState<string[]>([])
-  const [diet, setDiet] = useState("")
+  const [phone, setPhone] = useState("")
+
   useEffect(() => {
     ;(async () => {
       const session = (await supabase.auth.getSession()).data.session
@@ -85,7 +75,8 @@ export default function SetupPage() {
 
       has_onboarded: true,
       display_name: displayName,
-      username
+      username,
+      phone,
     }
     const updatedProfile = await updateProfile(profile.id, updateProfilePayload)
 

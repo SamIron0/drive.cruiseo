@@ -195,9 +195,11 @@ export type Database = {
           address: string | null
           username: string
           trips?: string[] | null
+          phone: string | null
         }
         Insert: {
           bio?: string
+          phone: string
           geolocation?: GeoCoordinate | null
           billing_address?: Json | null
           payment_method?: Json | null
@@ -229,6 +231,7 @@ export type Database = {
           address?: string | null
           username?: string
           trips?: string[] | null
+          phone?: string | null
         }
         Relationships: [
           {
