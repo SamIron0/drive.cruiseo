@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { TripBox } from "./TripBox"
 import { CruiseoContext } from "@/context/context"
 import { toast } from "sonner"
@@ -24,14 +24,13 @@ export function Available() {
 
     toast.success("Trip Accepted")
   }
+  useEffect(() => {
+    console.log(availableTrips)
+  }, [])
   return (
-    <div>x
+    <div>
       {availableTrips ? (
-        
-        <TripBox
-          onSelectTrip={handleSelectTrip}
-          trips={availableTrips}
-        />
+        <TripBox onSelectTrip={handleSelectTrip} trips={availableTrips} />
       ) : (
         <p>No trips available</p>
       )}
