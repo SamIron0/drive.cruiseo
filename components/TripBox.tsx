@@ -1,5 +1,13 @@
 import { Tables } from "@/supabase/types"
-import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "./ui/drawer"
 import { Button } from "./ui/button"
 
 interface TripBoxProps {
@@ -68,17 +76,16 @@ export const TripBox = ({
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
-<DrawerTitle>Trip Details</DrawerTitle>
-              </DrawerHeader>
+              <DrawerTitle>Trip Details</DrawerTitle>
+            </DrawerHeader>
             <Button>Accept Trip</Button>
-            
-          <DrawerFooter>
-            <DrawerClose>Cancel</DrawerClose>
-          </DrawerFooter>
+
+            <DrawerFooter>
+              <DrawerClose>Cancel</DrawerClose>
+            </DrawerFooter>
           </DrawerContent>
         </Drawer>
-      ))} 
+      ))}
     </div>
-    
   )
 }
