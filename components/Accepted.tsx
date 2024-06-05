@@ -23,7 +23,7 @@ export function Accepted() {
     }
 
     //after acceptting trip, rettrieve available trips
-    const result = await fetch("/api/acceptedtrips", { method: "GET" })
+    const result = await fetch("/api/getAcceptedtTrips", { method: "GET" })
 
     if (result.status !== 200) {
       toast.error("Error cancelling trip")
