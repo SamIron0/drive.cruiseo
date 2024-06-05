@@ -24,9 +24,6 @@ export function Available() {
 
     toast.success("Trip Accepted")
   }
-  useEffect(() => {
-    console.log(availableTrips)
-  }, [])
   return (
     <div>
       {availableTrips ? (

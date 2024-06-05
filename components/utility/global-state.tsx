@@ -33,7 +33,9 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const accepted_res = await fetch("/api/acceptedtrips", { method: "GET" })
       const available_data = await available_res.json()
       const accepted_data = await accepted_res.json()
-
+ 
+        console.log('new data',available_data)
+      
       !available_data.error ? setAvailableTrips(available_data) : null
       !accepted_data.error ? setAcceptedTrips(accepted_data) : null
     })()
