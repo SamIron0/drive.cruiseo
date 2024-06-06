@@ -14,6 +14,8 @@ interface CruiseoContext {
   setActiveCategory: Dispatch<SetStateAction<string>>
   profile: Tables<"profiles"> | null
   setProfile: Dispatch<SetStateAction<Tables<"profiles"> | null>>
+  driver: Tables<"drivers"> | null
+  setDriver: Dispatch<SetStateAction<Tables<"drivers"> | null>>
 }
 
 export const CruiseoContext = createContext<CruiseoContext>({
@@ -28,5 +30,7 @@ export const CruiseoContext = createContext<CruiseoContext>({
   activeCategory: "",
   setActiveCategory: () => {},
   profile: null,
-  setProfile: () => {}
+  setProfile: () => {},
+  driver: null,
+  setDriver: () => {}
 })

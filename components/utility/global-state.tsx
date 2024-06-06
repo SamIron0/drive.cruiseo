@@ -60,6 +60,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
+        driver,
+        setDriver,
         availableTrips,
         setAvailableTrips,
         acceptedTrips,
