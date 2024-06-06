@@ -2,7 +2,6 @@
 
 import { CruiseoContext } from "@/context/context"
 import {
-  createDriverProfile,
   getProfileByUserId,
   updateProfile
 } from "@/db/profile"
