@@ -36,7 +36,7 @@ export function Accepted() {
   return (
     <div>
       {acceptedTrips ? (
-        <TripBox onSelectTrip={handleCancelTrip} trips={acceptedTrips} />
+        <TripBox state="accepted" onSelectTrip={handleCancelTrip} trips={acceptedTrips} />
       ) : (
         <p>No trips available</p>
       )}

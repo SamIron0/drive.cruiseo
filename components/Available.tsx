@@ -40,7 +40,7 @@ export function Available() {
   return (
     <div className="w-full">
       {availableTrips ? (
-        <TripBox onSelectTrip={handleSelectTrip} trips={availableTrips} />
+        <TripBox state="available" onSelectTrip={handleSelectTrip} trips={availableTrips} />
       ) : (
         <p>No trips available</p>
       )}

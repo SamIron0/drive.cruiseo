@@ -23,11 +23,13 @@ import {
 
 interface TripBoxProps {
   trips: Tables<"trips">[] | null
+  state: "available" | "accepted"
   onSelectTrip: (trip: Tables<"trips">) => void
   selectedTrip?: Tables<"trips"> | null
 }
 export const TripBox = ({
   trips,
+  state,
   selectedTrip,
   onSelectTrip
 }: TripBoxProps) => {
@@ -91,14 +93,16 @@ export const TripBox = ({
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  < DrawerClose  className="px-20">Accept Trip</DrawerClose>
+                  <DrawerClose className="px-20">
+                    {" "}
+                    {state === "available" ? "Accept Trip" : "Drop Trip"}
+                  </DrawerClose>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action alerts the user that the trip has been
-                      accepted.
+                      This action alerts users of the status change
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
