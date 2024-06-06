@@ -85,7 +85,7 @@ export default function SetupPage() {
       rating: 5
     }
     try {
-      const driverProfile = await fetch("api/createDriver", {
+      const driverProfile = await fetch("api/createProfile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
