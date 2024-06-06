@@ -5,7 +5,8 @@ import { CruiseoContext } from "@/context/context"
 import { getProfileByUserId } from "@/db/profile"
 import { supabase } from "@/lib/supabase/browser-client"
 import { Tables } from "@/supabase/types"
-import { redirect, useRouter } from "next/navigation"
+import { Destination, Trip } from "@/types"
+import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 
 interface GlobalStateProps {
@@ -18,26 +19,30 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const router = useRouter()
   // PROFILE STORE
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
+  const [destinations, setDestinations] = useState<Destination[] | null>([])
   const [searchInput, setSearchInput] = useState<string>("")
-  const [activeCategory, setActiveCategory] = useState<string>("Available")
-  const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
-  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips">[]>([])
-  useState<Tables<"drivertrips"> | null>(null)
+  const [activeCategory, setActiveCategory] = useState<string>("All")
+  const [trip, setTrip] = useState<Trip | null>(null)
+
+  useEffect(() => {
+    // Update localStorage when selectedTrip changes
+    if (typeof window !== "undefined") {
+      if (selectedTrip) {
+        window.localStorage.setItem(
+          "selectedTrip",
+          JSON.stringify(selectedTrip)
+        )
+      }
+
+      if (!selectedTrip) {
+        window.localStorage.removeItem("selectedTrip")
+      }
+    }
+  }, [selectedTrip])
 
   useEffect(() => {
     ;(async () => {
       const profile = await fetchStartingData()
-      const available_res = await fetch("/api/availabletrips", {
-        method: "GET"
-      })
-      const accepted_res = await fetch("/api/getAcceptedTrips", { method: "GET" })
-      const available_data = await available_res.json()
-      const accepted_data = await accepted_res.json()
-
-      console.log("new data", available_res)
-
-      !available_data.error ? setAvailableTrips(available_data) : null
-      // !accepted_data.error ? setAcceptedTrips(accepted_data) : null
     })()
   }, [])
 
@@ -61,12 +66,10 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
-        acceptedTrips,
-        setAcceptedTrips,
-        availableTrips,
-        setAvailableTrips,
         profile,
         setProfile,
+        destinations,
+        setDestinations,
         searchInput,
         setSearchInput,
         activeCategory,

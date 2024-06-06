@@ -52,7 +52,7 @@ export default async function Login({
     if (error) {
       return redirect(`/login?message=${error.message}`)
     }
-    return redirect(`/`)
+    return redirect(`/destinations`)
   }
 
   const signUp = async (formData: FormData) => {
@@ -117,7 +117,6 @@ export default async function Login({
         <Input
           className="mb-3 rounded-md border bg-background  px-4 py-2 text-[16px]"
           name="email"
-          type="email"
           placeholder="you@example.com"
           required
         />
@@ -127,7 +126,6 @@ export default async function Login({
         </Label>
         <Input
           className="mb-6 rounded-md border bg-background px-4 py-2 text-[16px]"
-          type="password"
           name="password"
           placeholder="••••••••"
         />
