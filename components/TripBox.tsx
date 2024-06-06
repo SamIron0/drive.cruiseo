@@ -93,9 +93,10 @@ export const TripBox = ({
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <DrawerClose className="px-20">
-                    {" "}
-                    {state === "available" ? "Accept Trip" : "Drop Trip"}
+                  <DrawerClose>
+                    <Button className="px-20">
+                      {state === "available" ? "Accept Trip" : "Drop Trip"}
+                    </Button>
                   </DrawerClose>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
