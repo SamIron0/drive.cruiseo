@@ -3,7 +3,11 @@ import {
   createServerSupabaseClient
 } from "@supabase/auth-helpers-nextjs"
 import { NextApiHandler } from "next"
-import { getAcceptedTrips, getAvailableTrips } from "@/db/admin"
+import {
+  createDriverProfile,
+  getAcceptedTrips,
+  getAvailableTrips
+} from "@/db/admin"
 import { cookies } from "next/headers"
 import { Database, TablesInsert } from "@/supabase/types"
 
@@ -11,7 +15,7 @@ export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
       const body = await req.json()
-      const driver_id = body.driver_id
+      const driver = body.driver
       // Extract the id from the request body
       const supabase = createRouteHandlerClient<Database>({ cookies })
       const {
@@ -29,7 +33,7 @@ export async function POST(req: Request) {
         )
       }
 
-      const trips = await getAcceptedTrips(driver_id)
+      const trips = await createDriverProfile(driver)
       return new Response(JSON.stringify(trips), {
         status: 200
       })
