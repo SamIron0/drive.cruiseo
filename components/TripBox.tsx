@@ -92,13 +92,11 @@ export const TripBox = ({
                 <DrawerTitle>Trip Details</DrawerTitle>
               </DrawerHeader>
               <AlertDialog>
-                <DrawerClose>
-                  <AlertDialogTrigger>
-                    <Button className="px-20">
-                      {state === "available" ? "Accept Trip" : "Drop Trip"}
-                    </Button>{" "}
-                  </AlertDialogTrigger>
-                </DrawerClose>
+                <AlertDialogTrigger>
+                  <Button className="px-20">
+                    {state === "available" ? "Accept Trip" : "Drop Trip"}
+                  </Button>{" "}
+                </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
@@ -107,9 +105,14 @@ export const TripBox = ({
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>
+                      {" "}
+                      <DrawerClose>Cancel</DrawerClose>
+                    </AlertDialogCancel>
                     <AlertDialogAction onClick={() => onSelectTrip(trip)}>
-                      <Button>Continue</Button>
+                      <DrawerClose>
+                        <Button>Continue</Button>{" "}
+                      </DrawerClose>
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
