@@ -24,7 +24,12 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("All")
   const [trip, setTrip] = useState<Trip | null>(null)
-  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips">[] | null>(null)
+  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips">[] | null>(
+    null
+  )
+  const [availableTrips, setAvailableTrips] = useState<
+    Tables<"trips">[] | null
+  >(null)
 
   useEffect(() => {
     ;(async () => {
@@ -43,8 +48,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
       if (!profile.has_onboarded) {
         return router.push("/setup")
       } else {
-       // const driver = await getDriverByUserId(user.id)
-       //setDriver(profile)
+        // const driver = await getDriverByUserId(user.id)
+        //setDriver(profile)
       }
       setProfile(profile)
 
@@ -55,6 +60,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
+        availableTrips,
+        setAvailableTrips,
         acceptedTrips,
         setAcceptedTrips,
         profile,
