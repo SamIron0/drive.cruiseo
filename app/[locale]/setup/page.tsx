@@ -81,7 +81,8 @@ export default function SetupPage() {
     //create new driver profile
     const driver: TablesInsert<"drivers"> = {
       id: user.id,
-      rating: 5
+      rating: 5,
+      user_id: user.id
     }
     const driverProfile = await fetch("/api/createDriverProfile", {
       method: "POST",
