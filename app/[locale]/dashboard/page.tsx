@@ -94,19 +94,23 @@ export default function Home() {
     return
   }
   const handleAcceptTrip = async (trip: any) => {
-    const res = await fetch("api/acceptTrip", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ trip })
-    })
+    try {
+      const res = await fetch("api/acceptTrip", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ trip })
+      })
 
-    if (res.status !== 200) {
-      toast.error("Error accepting trip")
+      if (res.status !== 200) {
+        toast.error("Error accepting trip")
+      }
+      updateTrips()
+      toast.success("Trip Accepted")
+    } catch (err) {
+      console.log(err)
     }
-    updateTrips()
-    toast.success("Trip Accepted")
   }
   return (
     <div className="flex flex-col w-full items-center ">
