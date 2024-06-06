@@ -18,8 +18,6 @@ export default function Home() {
     profile,
     setProfile,
     activeCategory,
-    availableTrips,
-    acceptedTrips,
     setAcceptedTrips,
     setAvailableTrips
   } = useContext(CruiseoContext)
