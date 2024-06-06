@@ -111,6 +111,7 @@ export default function Home() {
     } catch (err) {
       console.log(err)
     }
+    return
   }
   return (
     <div className="flex flex-col w-full items-center ">
