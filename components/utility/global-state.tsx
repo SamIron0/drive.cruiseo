@@ -29,6 +29,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   useEffect(() => {
     ;(async () => {
       try {
+        const session = (await supabase.auth.getSession()).data.session
+
         const profile = await fetchStartingData()
         if (!profile?.has_onboarded) return
         const available_res = await fetch("/api/availabletrips", {
@@ -39,7 +41,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ driver_id: driver?.id })
+          body: JSON.stringify({ driver_id: session?.user?.id })
         })
         const accepted_data = await accepted_res.json()
         !accepted_data.error ? setAcceptedTrips(accepted_data) : null
