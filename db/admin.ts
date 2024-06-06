@@ -43,17 +43,31 @@ export const createDriverProfile = async (driver: TablesInsert<"drivers">) => {
   return createdDriver
 }
 export const getAcceptedTrips = async (driverId: string) => {
-  const { data: trips, error } = await supabaseAdmin
+  const { data: driverTrips, error: driverTripsError } = await supabaseAdmin
     .from("drivertrips")
-    .select("*")
+    .select("trip_id")
     .eq("driver_id", driverId)
 
-  if (error) {
-    console.error("Error retrieving trips:", error)
+  if (driverTripsError) {
+    console.error("Error retrieving trips:", driverTripsError)
     return null
   }
+  const result = []
+  for (let i = 0; i < driverTrips.length; i++) {
+    const { data: trip, error } = await supabaseAdmin
+      .from("trips")
+      .select("*")
+      .eq("id", driverTrips[i].trip_id)
 
-  return trips
+    if (error) {
+      console.error("Error retrieving trips:", error)
+      return null
+    }
+
+    result.push(trip[0])
+  }
+
+  return result
 }
 export const acceptTrip = async (tripId: string, driverId: string) => {
   const { data: trip, error } = await supabaseAdmin
