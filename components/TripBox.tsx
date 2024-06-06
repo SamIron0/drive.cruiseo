@@ -36,7 +36,7 @@ export const TripBox = ({
   return (
     <div className="p-4 flex flex-col overflow-y-auto">
       {trips?.map(trip =>
-        trip.status === "pending" ? (
+        trip.status === "accepted" ? (
           <Drawer>
             <DrawerTrigger>
               {" "}
