@@ -28,7 +28,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
 
   useEffect(() => {
     ;(async () => {
-      try {
+      /*try {
         const session = (await supabase.auth.getSession()).data.session
 
         const profile = await fetchStartingData()
@@ -53,9 +53,11 @@ export const GlobalState: FC<GlobalStateProps> = ({
         !available_data.error ? setAvailableTrips(available_data) : null
       } catch (error) {
         console.log(error)
-      }
+      }*/
+      const profile = await fetchStartingData()
+
     })()
-  })
+  }, [])
 
   const fetchStartingData = async () => {
     const session = (await supabase.auth.getSession()).data.session
