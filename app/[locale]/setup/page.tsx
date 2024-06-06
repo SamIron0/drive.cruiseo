@@ -16,9 +16,8 @@ import {
 import { v4 as uuid } from "uuid"
 import { createDriverProfile } from "@/db/admin"
 export default function SetupPage() {
-  const { profile, setProfile } = useContext(CruiseoContext)
-
   const router = useRouter()
+  const { profile, setProfile } = useContext(CruiseoContext)
 
   const [loading, setLoading] = useState(true)
 
