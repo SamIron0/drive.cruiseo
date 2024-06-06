@@ -2,6 +2,7 @@
 
 "use client"
 import { CruiseoContext } from "@/context/context"
+import { getDriverByUserId } from "@/db/driver"
 import { getProfileByUserId } from "@/db/profile"
 import { supabase } from "@/lib/supabase/browser-client"
 import { Tables } from "@/supabase/types"
@@ -18,6 +19,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const router = useRouter()
   // PROFILE STORE
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
+  const [driver, setDriver] = useState<Tables<"drivers"> | null>(null)
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("Available")
   const [availableTrips, setAvailableTrips] = useState<Tables<"trips">[]>([])
@@ -30,7 +32,13 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const available_res = await fetch("/api/availabletrips", {
         method: "GET"
       })
-      const accepted_res = await fetch("/api/getAcceptedTrips", { method: "GET" })
+      const accepted_res = await fetch("/api/getAcceptedTrips", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ driver_id: driver?.id })
+      })
       const available_data = await available_res.json()
       const accepted_data = await accepted_res.json()
 
@@ -48,11 +56,12 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const user = session.user
 
       const profile = await getProfileByUserId(user.id)
-
+      const driver = await getDriverByUserId(user.id)
       if (!profile.has_onboarded) {
         return router.push("/setup")
       }
       setProfile(profile)
+      setDriver(driver)
 
       return profile
     }
@@ -67,6 +76,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
         setAvailableTrips,
         profile,
         setProfile,
+        driver,
+        setDriver,
         searchInput,
         setSearchInput,
         activeCategory,
