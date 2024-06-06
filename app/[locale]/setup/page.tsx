@@ -14,10 +14,10 @@ import {
   StepContainer
 } from "../../../components/setup/step-container"
 import { v4 as uuid } from "uuid"
-import { createDriverProfile } from "@/db/admin"
 export default function SetupPage() {
-  const router = useRouter()
   const { profile, setProfile } = useContext(CruiseoContext)
+
+  const router = useRouter()
 
   const [loading, setLoading] = useState(true)
 
@@ -29,10 +29,25 @@ export default function SetupPage() {
   const [phone, setPhone] = useState("")
 
   useEffect(() => {
-    ;async () => {
+    ;(async () => {
       const session = (await supabase.auth.getSession()).data.session
-      console.log("sesh", session)
-    }
+
+      if (!session) {
+        return router.push("/login")
+      } else {
+        const user = session.user
+
+        const profile = await getProfileByUserId(user.id)
+        setProfile(profile)
+        setUsername(profile.username)
+
+        if (!profile.has_onboarded) {
+          setLoading(false)
+        } else {
+          return router.push(`/`)
+        }
+      }
+    })()
   }, [])
 
   const handleShouldProceed = (proceed: boolean) => {
@@ -64,12 +79,17 @@ export default function SetupPage() {
     }
     const updatedProfile = await updateProfile(profile.id, updateProfilePayload)
     //create new driver profile
-    const driverProfile = await createDriverProfile({
-      id: uuid(),
-      user_id: user.id,
-      rating: 5
+    const driverProfile = await fetch("/api/createDriverProfile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: uuid(),
+        user_id: user.id,
+        rating: 5
+      })
     })
-
     // updaate local and db settings
     setProfile(updatedProfile)
 
