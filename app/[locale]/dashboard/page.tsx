@@ -12,11 +12,13 @@ import { useContext, useEffect } from "react"
 import { supabase } from "@/lib/supabase/browser-client"
 import { getProfileByUserId } from "@/db/profile"
 import { toast } from "sonner"
+import { getDriverByUserId } from "@/db/driver"
 
 export default function Home() {
   const router = useRouter()
   const {
     driver,
+    setDriver,
     profile,
     setProfile,
     activeCategory,
@@ -66,6 +68,8 @@ export default function Home() {
     const available_result = await fetch("/api/availabletrips", {
       method: "GET"
     })
+    const driver_result = await getDriverByUserId(driver?.id as string)
+    setDriver(driver_result)
     const available_data = await available_result.json()
     const accepted_data = await accepted_result.json()
 
