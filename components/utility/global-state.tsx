@@ -25,22 +25,6 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [trip, setTrip] = useState<Trip | null>(null)
 
   useEffect(() => {
-    // Update localStorage when selectedTrip changes
-    if (typeof window !== "undefined") {
-      if (selectedTrip) {
-        window.localStorage.setItem(
-          "selectedTrip",
-          JSON.stringify(selectedTrip)
-        )
-      }
-
-      if (!selectedTrip) {
-        window.localStorage.removeItem("selectedTrip")
-      }
-    }
-  }, [selectedTrip])
-
-  useEffect(() => {
     ;(async () => {
       const profile = await fetchStartingData()
     })()
