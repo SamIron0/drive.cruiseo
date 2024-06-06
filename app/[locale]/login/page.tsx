@@ -79,8 +79,6 @@ export default async function Login({
     }
 
     return redirect("/setup")
-
-    // login after signup
   }
 
   const handleResetPassword = async (formData: FormData) => {

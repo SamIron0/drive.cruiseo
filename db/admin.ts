@@ -24,6 +24,19 @@ export const getAvailableTrips = async () => {
 
   return trips
 }
+export const createDriverProfile = async (driver: TablesInsert<"drivers">) => {
+  const { data: createdDriver, error } = await supabaseAdmin
+    .from("drivers")
+    .insert(driver)
+    .select("*")
+    .single()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return createdDriver
+}
 export const getAcceptedTrips = async (driverId: string) => {
   const { data: trips, error } = await supabaseAdmin
     .from("drivertrips")
