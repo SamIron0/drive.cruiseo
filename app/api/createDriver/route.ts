@@ -1,4 +1,4 @@
-import { acceptTrip, createDriverProfile } from "@/db/admin"
+import {  createDriverFunc } from "@/db/admin"
 import { Database } from "@/supabase/types"
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
       const body = await req.json()
       const driver = body.driver
-      const res = await createDriverProfile(driver)
+      const res = await createDriverFunc(driver)
 
       return new Response(JSON.stringify(res), { status: 200 })
     } catch (err: any) {

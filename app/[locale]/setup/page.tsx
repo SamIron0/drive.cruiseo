@@ -1,10 +1,7 @@
 "use client"
 
 import { CruiseoContext } from "@/context/context"
-import {
-  getProfileByUserId,
-  updateProfile
-} from "@/db/profile"
+import { getProfileByUserId, updateProfile } from "@/db/profile"
 
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
@@ -87,17 +84,21 @@ export default function SetupPage() {
       user_id: user.id,
       rating: 5
     }
-    const driverProfile = await fetch("api/createDriver", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        driver
+    try {
+      const driverProfile = await fetch("api/createDriver", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          driver
+        })
       })
-    })
-    const driverProfileJson = await driverProfile.json()
-    setDriver(driverProfileJson)
+      const driverProfileJson = await driverProfile.json()
+      setDriver(driverProfileJson)
+    } catch (e) {
+      console.log(e)
+    }
 
     // updaate local and db settings
     setProfile(updatedProfile)
