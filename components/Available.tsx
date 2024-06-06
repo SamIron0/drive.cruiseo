@@ -7,7 +7,8 @@ import { toast } from "sonner"
 
 interface GridProps {}
 export function Available() {
-  const { availableTrips, setAvailableTrips } = useContext(CruiseoContext)
+  const { availableTrips, setAvailableTrips, driver,setAcceptedTrips } =
+    useContext(CruiseoContext)
   const handleSelectTrip = async (trip: any) => {
     const res = await fetch("api/acceptTrip", {
       method: "POST",
@@ -18,9 +19,21 @@ export function Available() {
     })
 
     //after acceptting trip, rettrieve available trips
-    const result = await fetch("/api/availabletrips", { method: "GET" })
-    const data = await result.json()
-    setAvailableTrips(data)
+    const available_result = await fetch("/api/availabletrips", {
+      method: "GET"
+    })
+    const accepted_result = await fetch("/api/getAcceptedTrips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ driver_id: driver?.id })
+    })
+    const available_data = await available_result.json()
+    const accepted_data = await accepted_result.json()
+
+    setAvailableTrips(available_data)
+    setAcceptedTrips(accepted_data)
 
     toast.success("Trip Accepted")
   }
