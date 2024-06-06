@@ -1,4 +1,4 @@
-"use context"
+"use client"
 import { CruiseoContext } from "@/context/context"
 import { redirect, useRouter } from "next/navigation"
 import { useContext } from "react"
