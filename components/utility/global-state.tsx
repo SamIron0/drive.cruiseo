@@ -19,11 +19,12 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const router = useRouter()
   // PROFILE STORE
   const [profile, setProfile] = useState<Tables<"profiles"> | null>(null)
+  const [driver, setDriver] = useState<Tables<"drivers"> | null>(null)
   const [destinations, setDestinations] = useState<Destination[] | null>([])
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("All")
   const [trip, setTrip] = useState<Trip | null>(null)
-  const [acceptedTrips, setAcceptedTrips] = useState<Trip | null>(null)
+  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips"> | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -41,6 +42,9 @@ export const GlobalState: FC<GlobalStateProps> = ({
 
       if (!profile.has_onboarded) {
         return router.push("/setup")
+      } else {
+       // const driver = await getDriverByUserId(user.id)
+       //setDriver(profile)
       }
       setProfile(profile)
 
