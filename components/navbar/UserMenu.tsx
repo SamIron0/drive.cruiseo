@@ -12,8 +12,8 @@ import { toast } from "sonner"
 interface UserMenuProps {}
 
 export default function UserMenu() {
-  const supabase = createClient()
   const router = useRouter()
+  const supabase = createClient()
   const { profile } = useContext(CruiseoContext)
   // get session from api
   const signOut = async () => {
