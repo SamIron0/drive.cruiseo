@@ -108,15 +108,20 @@ export const completeTrip = async (tripId: string) => {
 }
 
 export const cancelTrip = async (tripId: string) => {
-  const { data: trip, error } = await supabaseAdmin
+  const { data: trip, error: tripError } = await supabaseAdmin
     .from("trips")
     .update({ id: tripId, status: "pending" })
     .eq("id", tripId)
 
-  if (error) {
-    console.error("Error cancelling trips:", error)
+  if (tripError) {
+    console.error("Error cancelling trips:", tripError)
     return null
   }
 
-  return trip
+  const { data: driverTrip, error: driverTripError } = await supabaseAdmin
+    .from("drivertrips")
+    .delete()
+    .eq("trip_id", tripId)
+
+  return driverTrip
 }
