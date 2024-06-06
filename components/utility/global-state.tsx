@@ -30,6 +30,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
     ;(async () => {
       try {
         const profile = await fetchStartingData()
+        if (!profile?.has_onboarded) return
         const available_res = await fetch("/api/availabletrips", {
           method: "GET"
         })

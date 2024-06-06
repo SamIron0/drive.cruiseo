@@ -15,7 +15,7 @@ import {
 } from "../../../components/setup/step-container"
 import { v4 as uuid } from "uuid"
 export default function SetupPage() {
-  const { profile, setProfile } = useContext(CruiseoContext)
+  const { profile, setProfile, driver, setDriver } = useContext(CruiseoContext)
 
   const router = useRouter()
 
@@ -90,6 +90,14 @@ export default function SetupPage() {
       },
       body: JSON.stringify(driver)
     })
+
+    if (!driverProfile.ok) {
+      return
+    }
+
+    const driverProfileData = await driverProfile.json()
+    setDriver(driverProfileData)
+
     // updaate local and db settings
     setProfile(updatedProfile)
 
