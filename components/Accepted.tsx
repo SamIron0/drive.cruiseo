@@ -7,7 +7,7 @@ import { toast } from "sonner"
 
 interface GridProps {}
 export function Accepted() {
-  const { acceptedTrips, setAcceptedTrips } = useContext(CruiseoContext)
+  const { driver, acceptedTrips, setAcceptedTrips } = useContext(CruiseoContext)
 
   const handleCancelTrip = async (trip: any) => {
     const res = await fetch("api/canceltrip", {
@@ -23,7 +23,13 @@ export function Accepted() {
     }
 
     //after acceptting trip, rettrieve available trips
-    const result = await fetch("/api/getAcceptedTrips", { method: "GET" })
+    const result = await fetch("/api/getAcceptedTrips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ driver_id: driver?.id })
+    })
 
     if (result.status !== 200) {
       toast.error("Error cancelling trip")
@@ -36,7 +42,11 @@ export function Accepted() {
   return (
     <div>
       {acceptedTrips ? (
-        <TripBox state="accepted" onSelectTrip={handleCancelTrip} trips={acceptedTrips} />
+        <TripBox
+          state="accepted"
+          onSelectTrip={handleCancelTrip}
+          trips={acceptedTrips}
+        />
       ) : (
         <p>No trips available</p>
       )}
