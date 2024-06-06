@@ -15,6 +15,7 @@ import { getProfileByUserId } from "@/db/profile"
 export default function Home() {
   const router = useRouter()
   const {
+    driver,
     profile,
     setProfile,
     activeCategory,
@@ -62,7 +63,9 @@ export default function Home() {
           {" "}
           Welcome back,{profile?.display_name} 👋
         </p>
-        <span className="flex text-xl w-full justify-end">Pending: 0</span>
+        <span className="flex text-xl w-full justify-end">
+          Pending: {driver?.pending_payout}
+        </span>
         <span className="text-xl flex mb-6 w-full justify-end">Payout: 0</span>
 
         <Categories />

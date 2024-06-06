@@ -83,6 +83,7 @@ export type Database = {
           license_number: string
           vehicle_details: string
           rating: number
+          pending_payout: number
         }
         Insert: {
           id: string
@@ -90,6 +91,7 @@ export type Database = {
           license_number?: string
           vehicle_details?: string
           rating?: number
+          pending_payout?: number
         }
         Update: {
           id: string
@@ -97,6 +99,7 @@ export type Database = {
           license_number?: string
           vehicle_details?: string
           rating?: number
+          pending_payout?: number
         }
         Relationships: [
           {
