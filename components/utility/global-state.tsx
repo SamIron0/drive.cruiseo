@@ -28,34 +28,12 @@ export const GlobalState: FC<GlobalStateProps> = ({
 
   useEffect(() => {
     ;(async () => {
-      /*try {
-        const session = (await supabase.auth.getSession()).data.session
-
+      try {
         const profile = await fetchStartingData()
         if (!profile?.has_onboarded) return
-        const available_res = await fetch("/api/availabletrips", {
-          method: "GET"
-        })
-        const accepted_res = await fetch("/api/getAcceptedTrips", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ driver_id: session?.user?.id })
-        })
-        const accepted_data = await accepted_res.json()
-        !accepted_data.error ? setAcceptedTrips(accepted_data) : null
-
-        const available_data = await available_res.json()
-
-        // console.log("new data", available_res)
-
-        !available_data.error ? setAvailableTrips(available_data) : null
       } catch (error) {
         console.log(error)
-      }*/
-      const profile = await fetchStartingData()
-
+      }
     })()
   }, [])
 

@@ -10,11 +10,50 @@ import Link from "next/link"
 import { redirect, useRouter } from "next/navigation"
 import { useContext, useEffect } from "react"
 import { supabase } from "@/lib/supabase/browser-client"
+import { getProfileByUserId } from "@/db/profile"
 
 export default function Home() {
   const router = useRouter()
-  const { activeCategory } = useContext(CruiseoContext)
+  const {
+    profile,
+    setProfile,
+    activeCategory,
+    availableTrips,
+    acceptedTrips,
+    setAcceptedTrips,
+    setAvailableTrips
+  } = useContext(CruiseoContext)
+  useEffect(() => {
+    ;(async () => {
+      const session = (await supabase.auth.getSession()).data.session
+      if (!session?.user?.id) {
+        router.push("/login")
+        return
+      }
+      if (!profile) {
+        const prof = await getProfileByUserId(session?.user?.id)
+        setProfile(prof)
+      }
+      const available_res = await fetch("/api/availabletrips", {
+        method: "GET"
+      })
+      const accepted_res = await fetch("/api/getAcceptedTrips", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ driver_id: session?.user?.id })
+      })
+      const accepted_data = await accepted_res.json()
+      !accepted_data.error ? setAcceptedTrips(accepted_data) : null
 
+      const available_data = await available_res.json()
+
+      // console.log("new data", available_res)
+
+      !available_data.error ? setAvailableTrips(available_data) : null
+    })()
+  }, [])
   useEffect(() => {
     ;(async () => {
       const session = (await supabase.auth.getSession()).data.session

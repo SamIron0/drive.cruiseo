@@ -33,7 +33,7 @@ export default async function Login({
   const session = (await supabase.auth.getSession()).data.session
 
   if (session) {
-    return redirect(`/dashboard`)
+    return redirect(`/`)
   }
 
   const signIn = async (formData: FormData) => {
@@ -78,7 +78,7 @@ export default async function Login({
       return redirect(`/login?message=${error.message}`)
     }
 
-    return redirect("/login")
+    return redirect("setup")
 
     // login after signup
     return

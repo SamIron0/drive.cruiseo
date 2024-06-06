@@ -1,6 +1,13 @@
-import { redirect } from "next/navigation"
+"use context"
+import { CruiseoContext } from "@/context/context"
+import { redirect, useRouter } from "next/navigation"
+import { useContext } from "react"
 
 export default function Home() {
-  redirect("/dashboard")
-  return <> </>
-}
+  const router = useRouter()
+  const { profile } = useContext(CruiseoContext)
+  if (!profile?.has_onboarded) {
+    router.push("/setup")
+    return
+  }
+  redirect("/dashboard")}
