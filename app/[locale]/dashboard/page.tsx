@@ -69,14 +69,14 @@ export default function Home() {
       method: "GET"
     })
     const driver_result = await getDriverByUserId(driver?.id as string)
-    setDriver(driver_result)
+    
     const available_data = await available_result.json()
     const accepted_data = await accepted_result.json()
 
     if (accepted_result.status !== 200) {
       toast.error("Error cancelling trip")
     }
-
+    setDriver(driver_result)
     setAcceptedTrips(accepted_data)
     setAvailableTrips(available_data)
   }
@@ -86,7 +86,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ trip,driver })
+      body: JSON.stringify({ trip, driver })
     })
 
     if (res.status !== 200) {
