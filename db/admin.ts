@@ -69,7 +69,7 @@ export const getAcceptedTrips = async (driverId: string) => {
 
   return result
 }
-export const acceptTrip = async (tripId: string, driverId: string) => {
+export const acceptTrip = async (tripId: string, driver: Tables<"drivers">) => {
   const { data: trip, error } = await supabaseAdmin
     .from("trips")
     .update({ id: tripId, status: "accepted" })
@@ -84,29 +84,21 @@ export const acceptTrip = async (tripId: string, driverId: string) => {
 
   const { data: driverTrip, error: driverTripError } = await supabaseAdmin
     .from("drivertrips")
-    .insert({ id: uuid(), driver_id: driverId, trip_id: tripId })
+    .insert({ id: uuid(), driver_id: driver.id, trip_id: tripId })
     .select("*")
 
   if (driverTripError) {
     console.error("Error retrieving trips:", driverTripError)
     return null
   }
-  //get driveer payout
-  const { data: driver, error: driverError } = await supabaseAdmin
-    .from("drivers")
-    .select("pending_payout")
-    .eq("id", driverId)
-    .single()
-
-  if (driverError) {
-    console.error("Error retrieving trips:", driverError)
-    return null
-  }
   // update driver payout
-  const { data: updateDriver, error: updateDriverError } = await supabaseAdmin
+  const { data, error: driverError } = await supabaseAdmin
     .from("drivers")
-    .update({ id: driverId, pending_payout: driver?.pending_payout + 0.75 * trip?.price })
-    .eq("id", driverId)
+    .update({
+      id: driver.id,
+      pending_payout: driver.pending_payout + 0.75 * trip?.price
+    })
+    .eq("id", driver.id)
 
   return driverTrip
 }
@@ -125,11 +117,13 @@ export const completeTrip = async (tripId: string) => {
   return trip
 }
 
-export const cancelTrip = async (tripId: string) => {
+export const cancelTrip = async (tripId: string, driver: Tables<"drivers">) => {
   const { data: trip, error: tripError } = await supabaseAdmin
     .from("trips")
     .update({ id: tripId, status: "pending" })
     .eq("id", tripId)
+    .select("*")
+    .single()
 
   if (tripError) {
     console.error("Error cancelling trips:", tripError)
@@ -141,5 +135,17 @@ export const cancelTrip = async (tripId: string) => {
     .delete()
     .eq("trip_id", tripId)
 
+  const { data, error: driverError } = await supabaseAdmin
+    .from("drivers")
+    .update({
+      id: driver.id,
+      pending_payout: driver.pending_payout - 0.75 * trip?.price
+    })
+    .eq("id", driver.id)
+
+  if (driverTripError) {
+    console.error("Error cancelling trips:", driverTripError)
+    return null
+  }
   return driverTrip
 }
