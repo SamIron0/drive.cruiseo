@@ -11,6 +11,19 @@ const supabaseAdmin = createClient<Database>(
   process.env.SUPABASE_SERVICE_ROLE_KEY || ""
 )
 
+export const createDriverProfile = async (driver: TablesInsert<"drivers">) => {
+  const { data: createdDriver, error } = await supabaseAdmin
+    .from("drivers")
+    .insert(driver)
+    .select("*")
+    .single()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return createdDriver
+}
 export const getAvailableTrips = async () => {
   const { data: trips, error } = await supabaseAdmin
     .from("trips")

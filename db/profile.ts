@@ -28,33 +28,8 @@ export const getProfilesByUserId = async (userId: string) => {
   return profiles
 }
 
-export const createProfile = async (profile: TablesInsert<"profiles">) => {
-  const { data: createdProfile, error } = await supabase
-    .from("profiles")
-    .insert([profile])
-    .select("*")
-    .single()
 
-  if (error) {
-    throw new Error(error.message)
-  }
 
-  return createdProfile
-}
-
-export const createDriverProfile = async (driver: TablesInsert<"drivers">) => {
-  const { data: createdDriver, error } = await supabase
-    .from("drivers")
-    .insert(driver)
-    .select("*")
-    .single()
-
-  if (error) {
-    throw new Error(error.message)
-  }
-
-  return createdDriver
-}
 export const updateProfile = async (
   profileId: string,
   profile: TablesUpdate<"profiles">

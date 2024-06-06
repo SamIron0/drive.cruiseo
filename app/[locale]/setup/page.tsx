@@ -8,7 +8,7 @@ import {
 } from "@/db/profile"
 
 import { supabase } from "@/lib/supabase/browser-client"
-import { TablesUpdate } from "@/supabase/types"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 import { FinishStep } from "../../../components/setup/finish-step"
@@ -83,10 +83,19 @@ export default function SetupPage() {
     }
     const updatedProfile = await updateProfile(profile.id, updateProfilePayload)
     //create new driver profile
-    const driverProfile = await createDriverProfile({
+    const driver: TablesInsert<"drivers"> = {
       id: uuid(),
       user_id: user.id,
-      rating: 5,
+      rating: 5
+    }
+    const driverProfile = await fetch("api/createDriver", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        driver
+      })
     })
 
     // updaate local and db settings
