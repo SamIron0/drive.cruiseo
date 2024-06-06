@@ -91,7 +91,7 @@ export const TripBox = ({
               </DrawerHeader>
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <Button className="px-20">Accept Trip</Button>
+                  < DrawerClose  className="px-20">Accept Trip</DrawerClose>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
