@@ -28,7 +28,7 @@ export const getAcceptedTrips = async (driverId: string) => {
   const { data: trips, error } = await supabaseAdmin
     .from("drivertrips")
     .select("*")
-    .eq("driverId", driverId)
+    .eq("driver_id", driverId)
 
   if (error) {
     console.error("Error retrieving trips:", error)
