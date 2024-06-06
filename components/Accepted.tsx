@@ -10,7 +10,7 @@ export function Accepted() {
   const { acceptedTrips, setAcceptedTrips } = useContext(CruiseoContext)
 
   const handleCancelTrip = async (trip: any) => {
-    const res = await fetch("api/cancelTrip", {
+    const res = await fetch("api/canceltrip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
