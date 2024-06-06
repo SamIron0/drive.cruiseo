@@ -33,8 +33,8 @@ export async function POST(req: Request) {
         )
       }
       console.log(driver)
-      //console.log(JSON.parse(driver))
-      const trips = await createDriverProfile(driver)
+      console.log(JSON.parse(driver))
+      const trips = await createDriverProfile(JSON.parse(driver))
       return new Response(JSON.stringify(trips), {
         status: 200
       })

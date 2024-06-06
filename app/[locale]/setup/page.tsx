@@ -89,7 +89,9 @@ export default function SetupPage() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(driver)
+      body: JSON.stringify({
+        driver
+      })
     })
 
     if (!driverProfile.ok) {
