@@ -96,7 +96,7 @@ export const acceptTrip = async (tripId: string, driver: Tables<"drivers">) => {
     .from("drivers")
     .update({
       id: driver.id,
-      pending_payout: driver.pending_payout + 0.75 * trip?.price
+      pending_payout: driver.pending_payout + trip?.price
     })
     .eq("id", driver.id)
 
@@ -139,7 +139,7 @@ export const cancelTrip = async (tripId: string, driver: Tables<"drivers">) => {
     .from("drivers")
     .update({
       id: driver.id,
-      pending_payout: driver.pending_payout - 0.75 * trip?.price
+      pending_payout: driver.pending_payout - trip?.price
     })
     .eq("id", driver.id)
 
