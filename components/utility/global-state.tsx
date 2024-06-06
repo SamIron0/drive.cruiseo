@@ -52,7 +52,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
         console.log(error)
       }
     })()
-  }, [])
+  })
 
   const fetchStartingData = async () => {
     const session = (await supabase.auth.getSession()).data.session
