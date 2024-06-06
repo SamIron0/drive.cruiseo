@@ -54,19 +54,7 @@ export default function Home() {
       !available_data.error ? setAvailableTrips(available_data) : null
     })()
   }, [])
-  const handleCancelTrip = async (trip: any) => {
-    const res = await fetch("api/canceltrip", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ trip })
-    })
-
-    if (res.status !== 200) {
-      toast.error("Error cancelling trip")
-    }
-
+  const updateTrips = async () => {
     //after acceptting trip, rettrieve available trips
     const accepted_result = await fetch("/api/getAcceptedTrips", {
       method: "POST",
@@ -87,7 +75,21 @@ export default function Home() {
 
     setAcceptedTrips(accepted_data)
     setAvailableTrips(available_data)
+  }
+  const handleCancelTrip = async (trip: any) => {
+    const res = await fetch("api/canceltrip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ trip })
+    })
 
+    if (res.status !== 200) {
+      toast.error("Error cancelling trip")
+    }
+
+    updateTrips()
     toast.success("Trip Cancelled")
     return
   }
@@ -100,23 +102,10 @@ export default function Home() {
       body: JSON.stringify({ trip })
     })
 
-    //after acceptting trip, rettrieve available trips
-    const available_result = await fetch("/api/availabletrips", {
-      method: "GET"
-    })
-    const accepted_result = await fetch("/api/getAcceptedTrips", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ driver_id: driver?.id })
-    })
-    const available_data = await available_result.json()
-    const accepted_data = await accepted_result.json()
-
-    setAvailableTrips(available_data)
-    setAcceptedTrips(accepted_data)
-
+    if (res.status !== 200) {
+      toast.error("Error accepting trip")
+    }
+    updateTrips()
     toast.success("Trip Accepted")
   }
   return (
