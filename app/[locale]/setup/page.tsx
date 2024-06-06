@@ -29,25 +29,10 @@ export default function SetupPage() {
   const [phone, setPhone] = useState("")
 
   useEffect(() => {
-    ;(async () => {
+    ;async () => {
       const session = (await supabase.auth.getSession()).data.session
-
-      if (!session) {
-        return router.push("/login")
-      } else {
-        const user = session.user
-
-        const profile = await getProfileByUserId(user.id)
-        setProfile(profile)
-        setUsername(profile.username)
-
-        if (!profile.has_onboarded) {
-          setLoading(false)
-        } else {
-          return router.push(`/`)
-        }
-      }
-    })()
+      console.log("sesh", session)
+    }
   }, [])
 
   const handleShouldProceed = (proceed: boolean) => {
