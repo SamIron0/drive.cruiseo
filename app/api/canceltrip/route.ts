@@ -24,7 +24,9 @@ export async function POST(req: Request) {
 
       const body = await req.json()
       const trip = body.trip
-      const res = await cancelTrip(trip.id)
+
+      const driver = body.driver
+      const res = await cancelTrip(trip.id, driver)
 
       return new Response(JSON.stringify(res), { status: 200 })
     } catch (err: any) {

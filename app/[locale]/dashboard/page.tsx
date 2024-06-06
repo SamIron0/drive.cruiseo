@@ -86,7 +86,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ trip })
+      body: JSON.stringify({ trip,driver })
     })
 
     if (res.status !== 200) {
@@ -104,7 +104,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ trip })
+        body: JSON.stringify({ trip, driver })
       })
 
       if (res.status !== 200) {
