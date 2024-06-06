@@ -24,7 +24,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("All")
   const [trip, setTrip] = useState<Trip | null>(null)
-  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips"> | null>(null)
+  const [acceptedTrips, setAcceptedTrips] = useState<Tables<"trips">[] | null>(null)
 
   useEffect(() => {
     ;(async () => {
