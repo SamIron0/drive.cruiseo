@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         )
       }
 
-      const trips = await createDriverProfile(driver)
+      const trips = await createDriverProfile(JSON.parse(driver))
       return new Response(JSON.stringify(trips), {
         status: 200
       })
