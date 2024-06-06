@@ -91,10 +91,21 @@ export const acceptTrip = async (tripId: string, driverId: string) => {
     console.error("Error retrieving trips:", driverTripError)
     return null
   }
-  // update driver payout
+  //get driveer payout
   const { data: driver, error: driverError } = await supabaseAdmin
     .from("drivers")
-    .update({ id: driverId, pending_payout: 0.75 * trip?.price })
+    .select("pending_payout")
+    .eq("id", driverId)
+    .single()
+
+  if (driverError) {
+    console.error("Error retrieving trips:", driverError)
+    return null
+  }
+  // update driver payout
+  const { data: updateDriver, error: updateDriverError } = await supabaseAdmin
+    .from("drivers")
+    .update({ id: driverId, pending_payout: driver?.pending_payout + 0.75 * trip?.price })
     .eq("id", driverId)
 
   return driverTrip
