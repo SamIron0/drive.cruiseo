@@ -23,6 +23,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
   const [searchInput, setSearchInput] = useState<string>("")
   const [activeCategory, setActiveCategory] = useState<string>("All")
   const [trip, setTrip] = useState<Trip | null>(null)
+  const [acceptedTrip, setAcceptedTrip] = useState<Trip | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -50,6 +51,8 @@ export const GlobalState: FC<GlobalStateProps> = ({
   return (
     <CruiseoContext.Provider
       value={{
+        acceptedTrip,
+        setAcceptedTrip,
         profile,
         setProfile,
         destinations,
