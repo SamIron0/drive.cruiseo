@@ -11,6 +11,7 @@ import { redirect, useRouter } from "next/navigation"
 import { useContext, useEffect } from "react"
 import { supabase } from "@/lib/supabase/browser-client"
 import { getProfileByUserId } from "@/db/profile"
+import { toast } from "sonner"
 
 export default function Home() {
   const router = useRouter()
@@ -53,7 +54,71 @@ export default function Home() {
       !available_data.error ? setAvailableTrips(available_data) : null
     })()
   }, [])
+  const handleCancelTrip = async (trip: any) => {
+    const res = await fetch("api/canceltrip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ trip })
+    })
 
+    if (res.status !== 200) {
+      toast.error("Error cancelling trip")
+    }
+
+    //after acceptting trip, rettrieve available trips
+    const accepted_result = await fetch("/api/getAcceptedTrips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ driver_id: driver?.id })
+    })
+    const available_result = await fetch("/api/availabletrips", {
+      method: "GET"
+    })
+    const available_data = await available_result.json()
+    const accepted_data = await accepted_result.json()
+
+    if (accepted_result.status !== 200) {
+      toast.error("Error cancelling trip")
+    }
+
+    setAcceptedTrips(accepted_data)
+    setAvailableTrips(available_data)
+
+    toast.success("Trip Cancelled")
+    return
+  }
+  const handleAcceptTrip = async (trip: any) => {
+    const res = await fetch("api/acceptTrip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ trip })
+    })
+
+    //after acceptting trip, rettrieve available trips
+    const available_result = await fetch("/api/availabletrips", {
+      method: "GET"
+    })
+    const accepted_result = await fetch("/api/getAcceptedTrips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ driver_id: driver?.id })
+    })
+    const available_data = await available_result.json()
+    const accepted_data = await accepted_result.json()
+
+    setAvailableTrips(available_data)
+    setAcceptedTrips(accepted_data)
+
+    toast.success("Trip Accepted")
+  }
   return (
     <div className="flex flex-col w-full items-center ">
       <Navbar />
@@ -69,7 +134,11 @@ export default function Home() {
         <span className="text-xl flex mb-6 w-full justify-end">Payout: 0</span>
 
         <Categories />
-        {activeCategory === "Available" ? <Available /> : <Accepted />}
+        {activeCategory === "Available" ? (
+          <Available onAcceptTrip={handleAcceptTrip} />
+        ) : (
+          <Accepted onCancelTrip={handleCancelTrip} />
+        )}
       </div>
     </div>
   )
