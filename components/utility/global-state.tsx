@@ -72,7 +72,6 @@ export const GlobalState: FC<GlobalStateProps> = ({
       return profile
     }
   }
-
   return (
     <CruiseoContext.Provider
       value={{
