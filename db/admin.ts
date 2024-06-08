@@ -117,6 +117,19 @@ export const completeTrip = async (tripId: string) => {
   return trip
 }
 
+export const has_onboarded = async (driverId: string) => {
+  const { data: driver, error } = await supabaseAdmin
+    .from("drivers")
+    .select("*")
+    .eq("id", driverId)
+    .single()
+
+  if (error) {
+    console.error("Error retrieving trips:", error)
+    return null
+  }
+  return driver.has_onboarded
+}
 export const cancelTrip = async (tripId: string, driver: Tables<"drivers">) => {
   const { data: trip, error: tripError } = await supabaseAdmin
     .from("trips")

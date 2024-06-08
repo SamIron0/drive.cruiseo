@@ -84,6 +84,7 @@ export type Database = {
           vehicle_details: string
           rating: number
           pending_payout: number
+          has_onboarded: boolean
         }
         Insert: {
           id: string
@@ -92,6 +93,7 @@ export type Database = {
           vehicle_details?: string
           rating?: number
           pending_payout?: number
+          has_onboarded?: boolean
         }
         Update: {
           id: string
@@ -100,6 +102,7 @@ export type Database = {
           vehicle_details?: string
           rating?: number
           pending_payout?: number
+          has_onboarded?: boolean
         }
         Relationships: [
           {
