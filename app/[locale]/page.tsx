@@ -1,6 +1,6 @@
 "use client"
 import { CruiseoContext } from "@/context/context"
-import { redirect, useRouter } from "next/navigation"
+import {useRouter } from "next/navigation"
 import { useContext } from "react"
 
 export default function Home() {
