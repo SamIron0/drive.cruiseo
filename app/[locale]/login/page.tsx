@@ -9,6 +9,7 @@ import { Database } from "@/supabase/types"
 import { createServerClient } from "@supabase/ssr"
 import { Metadata } from "next"
 import { cookies, headers } from "next/headers"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
