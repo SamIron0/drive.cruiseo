@@ -21,8 +21,6 @@ export default function SetupPage() {
 
   const router = useRouter()
 
-  const [loading, setLoading] = useState(true)
-
   const [currentStep, setCurrentStep] = useState(1)
 
   // Profile Step
@@ -152,19 +150,9 @@ export default function SetupPage() {
         return null
     }
   }
-
-  if (loading) {
-    return null
-  }
-
   return (
     <div className="flex h-screen items-center justify-center">
-      x{setupComplete ? (
-        
-        <OnBoardingWait />
-      ) : (
-        renderStep(currentStep)
-      )}
+      x{setupComplete ? <OnBoardingWait /> : renderStep(currentStep)}
     </div>
   )
 }
