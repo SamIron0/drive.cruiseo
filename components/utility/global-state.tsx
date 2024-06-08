@@ -42,7 +42,9 @@ export const GlobalState: FC<GlobalStateProps> = ({
 
     if (session) {
       const user = session.user
-
+      if (!user) {
+        redirect("/login")
+      }
       const profile = await getProfileByUserId(user.id)
       setProfile(profile)
       if (!profile.has_onboarded) {
