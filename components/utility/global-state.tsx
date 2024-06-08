@@ -47,9 +47,6 @@ export const GlobalState: FC<GlobalStateProps> = ({
       setProfile(profile)
       if (!profile.has_onboarded) {
         return router.push("/setup")
-      } else {
-        const driver = await getDriverByUserId(user.id)
-        setDriver(driver)
       }
       return profile
     }

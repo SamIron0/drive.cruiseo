@@ -5,10 +5,6 @@ import { useContext } from "react"
 
 export default function Home() {
   const router = useRouter()
-  const { driver } = useContext(CruiseoContext)
-  if (!driver?.has_onboarded) {
-    router.push("/setup")
-    return
-  }
-  redirect("/dashboard")
+  
+  router.push("/dashboard")
 }
