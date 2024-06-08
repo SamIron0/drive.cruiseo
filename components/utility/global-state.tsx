@@ -43,7 +43,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
     if (session) {
       const user = session.user
       if (!user) {
-        redirect("/login")
+        router.push("/login")
         return
       }
       const profile = await getProfileByUserId(user.id)
