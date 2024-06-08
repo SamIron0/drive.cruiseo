@@ -44,6 +44,7 @@ export const GlobalState: FC<GlobalStateProps> = ({
       const user = session.user
       if (!user) {
         redirect("/login")
+        return
       }
       const profile = await getProfileByUserId(user.id)
       setProfile(profile)
