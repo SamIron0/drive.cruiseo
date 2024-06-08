@@ -18,11 +18,8 @@ import { getDriverByUserId } from "@/db/driver"
 import { OnBoardingWait } from "@/components/setup/onboarding-wait"
 export default function SetupPage() {
   const { profile, setProfile, driver, setDriver } = useContext(CruiseoContext)
-
   const router = useRouter()
-
   const [currentStep, setCurrentStep] = useState(1)
-
   // Profile Step
   const [username, setUsername] = useState(profile?.full_name || "")
   const [setupComplete, setSetupComplete] = useState(false)
@@ -152,7 +149,7 @@ export default function SetupPage() {
   }
   return (
     <div className="flex h-screen items-center justify-center">
-      x{setupComplete ? <OnBoardingWait /> : renderStep(currentStep)}
+      {setupComplete ? <OnBoardingWait /> : renderStep(currentStep)}
     </div>
   )
 }

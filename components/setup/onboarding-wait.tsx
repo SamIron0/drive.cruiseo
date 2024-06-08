@@ -25,7 +25,7 @@ export const OnBoardingWait: FC<OnBoardingWaitProps> = ({  }) => {
 
       <h1 className="text-2xl font-bold mb-2">Thank you for your interest.</h1>
 
-      <p className="text-lg text-gray-600">
+      <p className="text-lg text-zinc-500">
         We will contact you shortly to finish onboarding.
       </p>
     </div>
