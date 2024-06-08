@@ -14,6 +14,7 @@ import {
   StepContainer
 } from "../../../components/setup/step-container"
 import { v4 as uuid } from "uuid"
+import { getDriverByUserId } from "@/db/driver"
 export default function SetupPage() {
   const { profile, setProfile, driver, setDriver } = useContext(CruiseoContext)
 
@@ -32,21 +33,22 @@ export default function SetupPage() {
     ;(async () => {
       const session = (await supabase.auth.getSession()).data.session
 
-      if (!session) {
-        return router.push("/login")
-      } else {
-        const user = session.user
+      if (!session) return router.push("/login")
 
-        const profile = await getProfileByUserId(user.id)
-        setProfile(profile)
-        setUsername(profile.full_name)
+      const user = session.user
 
-        if (!profile.has_onboarded) {
-          setLoading(false)
-        } else {
-          return router.push(`/`)
-        }
+      const profile = await getProfileByUserId(user.id)
+      setProfile(profile)
+      const driver = await getDriverByUserId(user.id)
+      setDriver(driver)
+      if (driver && !driver.has_onboarded) {
+        setCurrentStep(3)
+        return
       }
+      if (driver?.has_onboarded) {
+        router.push("/dashboard")
+      }
+      setUsername(profile.full_name)
     })()
   }, [])
 

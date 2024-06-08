@@ -3,9 +3,10 @@ import {
   createServerSupabaseClient
 } from "@supabase/auth-helpers-nextjs"
 import { NextApiHandler } from "next"
-import { getAcceptedTrips, getAvailableTrips, has_onboarded } from "@/db/admin"
+import { getAcceptedTrips, getAvailableTrips } from "@/db/admin"
 import { cookies } from "next/headers"
 import { Database, TablesInsert } from "@/supabase/types"
+import { has_onboarded } from "@/db/driver"
 
 export async function POST(req: Request) {
   if (req.method === "POST") {

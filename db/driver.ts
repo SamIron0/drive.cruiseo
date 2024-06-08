@@ -14,3 +14,17 @@ export const getDriverByUserId = async (userId: string) => {
 
   return profile
 }
+
+export const has_onboarded = async (driverId: string) => {
+  const { data: driver, error } = await supabase
+    .from("drivers")
+    .select("*")
+    .eq("id", driverId)
+    .single()
+
+  if (error) {
+    console.error("Error retrieving trips:", error)
+    return null
+  }
+  return driver.has_onboarded
+}

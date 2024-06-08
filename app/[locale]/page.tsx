@@ -5,9 +5,10 @@ import { useContext } from "react"
 
 export default function Home() {
   const router = useRouter()
-  const { profile } = useContext(CruiseoContext)
-  if (!profile?.has_onboarded) {
+  const { driver } = useContext(CruiseoContext)
+  if (!driver?.has_onboarded) {
     router.push("/setup")
     return
   }
-  redirect("/dashboard")}
+  redirect("/dashboard")
+}
