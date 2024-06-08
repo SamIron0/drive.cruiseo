@@ -15,7 +15,7 @@ export function Accepted( { onCancelTrip }: AcceptedProps) {
   
   return (
     <div>
-      {acceptedTrips ? (
+      {acceptedTrips.length>0 ? (
         <TripBox
           state="accepted"
           onSelectTrip={onCancelTrip}

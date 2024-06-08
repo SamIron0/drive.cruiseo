@@ -34,12 +34,11 @@ export default function Home() {
       }
       if (!profile) {
         const prof = await getProfileByUserId(session?.user?.id)
-        const driver = await getDriverByUserId(session?.user?.id)
-        setDriver(driver)
         setProfile(prof)
       }
-
-      if (!driver) {
+      const data = await getDriverByUserId(session?.user?.id)
+      setDriver(data)
+      if (!data  || !data.has_onboarded) {
         router.push("/setup")
       }
       const available_res = await fetch("/api/availabletrips", {
