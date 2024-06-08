@@ -104,7 +104,7 @@ export default async function Login({
   }
 
   return (
-    <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 pt-20 pb-28 sm:max-w-md">
+    <div className="flex w-full flex-1 flex-col justify-center gap-5 px-8 pt-20 pb-28 sm:max-w-md">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -148,7 +148,7 @@ export default async function Login({
         </g>
       </svg>
       <form
-        className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground animate-in"
+        className="flex w-full  flex-1 flex-col justify-center gap-2 text-foreground animate-in"
         action={signIn}
       >
         <Label className="text-md mt-4" htmlFor="email">
