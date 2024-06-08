@@ -15,6 +15,7 @@ import {
 } from "../../../components/setup/step-container"
 import { v4 as uuid } from "uuid"
 import { getDriverByUserId } from "@/db/driver"
+import { OnBoardingWait } from "@/components/setup/onboarding-wait"
 export default function SetupPage() {
   const { profile, setProfile, driver, setDriver } = useContext(CruiseoContext)
 
@@ -159,7 +160,7 @@ export default function SetupPage() {
   return (
     <div className="flex h-screen items-center justify-center">
       {setupComplete ? (
-        <FinishStep username={username} />
+        <OnBoardingWait />
       ) : (
         renderStep(currentStep)
       )}

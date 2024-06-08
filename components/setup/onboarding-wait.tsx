@@ -1,10 +1,9 @@
 import { FC } from "react"
 
-interface OnBoadingWaitProps {
-  username: string
+interface OnBoardingWaitProps {
 }
 
-export const OnBoadingWait: FC<OnBoadingWaitProps> = ({ username }) => {
+export const OnBoardingWait: FC<OnBoardingWaitProps> = ({  }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="mb-6">
