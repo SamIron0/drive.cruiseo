@@ -26,7 +26,7 @@ export default function SetupPage() {
 
   // Profile Step
   const [username, setUsername] = useState(profile?.full_name || "")
-  const [usernameAvailable, setUsernameAvailable] = useState(true)
+  const [setupComplete, setSetupComplete] = useState(false)
   const [phone, setPhone] = useState("")
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function SetupPage() {
       const driver = await getDriverByUserId(user.id)
       setDriver(driver)
       if (driver && !driver.has_onboarded) {
-        setCurrentStep(3)
+        setSetupComplete(true)
         return
       }
       if (driver?.has_onboarded) {
@@ -158,7 +158,11 @@ export default function SetupPage() {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      {renderStep(currentStep)}
+      {setupComplete ? (
+        <FinishStep username={username} />
+      ) : (
+        renderStep(currentStep)
+      )}
     </div>
   )
 }
