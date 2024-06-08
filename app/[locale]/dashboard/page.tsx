@@ -34,7 +34,13 @@ export default function Home() {
       }
       if (!profile) {
         const prof = await getProfileByUserId(session?.user?.id)
+        const driver = await getDriverByUserId(session?.user?.id)
+        setDriver(driver)
         setProfile(prof)
+      }
+
+      if (!driver) {
+        router.push("/setup")
       }
       const available_res = await fetch("/api/availabletrips", {
         method: "GET"
@@ -69,7 +75,7 @@ export default function Home() {
       method: "GET"
     })
     const driver_result = await getDriverByUserId(driver?.id as string)
-    
+
     const available_data = await available_result.json()
     const accepted_data = await accepted_result.json()
 
