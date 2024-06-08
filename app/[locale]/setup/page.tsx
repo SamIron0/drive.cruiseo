@@ -159,7 +159,8 @@ export default function SetupPage() {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      {setupComplete ? (
+      x{setupComplete ? (
+        
         <OnBoardingWait />
       ) : (
         renderStep(currentStep)
