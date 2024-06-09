@@ -12,9 +12,9 @@ import { toast } from "sonner"
 interface UserMenuProps {}
 
 export default function UserMenu() {
-  const router = useRouter()
   const supabase = createClient()
-  const { profile } = useContext(CruiseoContext)
+  const router = useRouter()
+  const { profile, setProfile } = useContext(CruiseoContext)
   // get session from api
   const signOut = async () => {
     try {
@@ -22,6 +22,7 @@ export default function UserMenu() {
       if (error) {
         toast.error(error.message)
       } else {
+        setProfile(null)
         router.push("/")
         toast.success("Signed Out")
       }
@@ -39,6 +40,24 @@ export default function UserMenu() {
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
+        <div
+          onClick={() => router.push("/contactus")}
+          className="
+            hidden
+            md:block
+            text-sm 
+            font-medium
+            py-3 
+            px-4 
+            rounded-full 
+            hover:bg-[#232325]
+
+            transition 
+            cursor-pointer
+          "
+        >
+          Contact
+        </div>
         <div
           onClick={toggleOpen}
           className="
@@ -73,16 +92,20 @@ export default function UserMenu() {
             absolute 
             rounded-xl 
             shadow-md
-            w-[180px]
+            w-[200px]
             overflow-hidden 
             right-0 
-            top-12 
             text-sm
           "
         >
           <div className="flex flex-col cursor-pointer">
             {profile ? (
               <>
+                <MenuItem
+                  label="My Account"
+                  onClick={() => router.push("/dashboard")}
+                />
+
                 <MenuItem
                   label="Logout"
                   onClick={() => {
