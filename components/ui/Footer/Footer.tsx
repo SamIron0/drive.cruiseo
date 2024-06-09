@@ -16,6 +16,7 @@ export default function Footer() {
                 width="25"
                 zoomAndPan="magnify"
                 viewBox="0 0 375 187.499995"
+                height="250"
                 preserveAspectRatio="xMidYMid meet"
                 version="1.0"
               >
